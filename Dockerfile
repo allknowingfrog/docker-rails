@@ -1,10 +1,10 @@
-FROM ruby:2.2.5
+FROM ruby
 
 Maintainer Jeremiah A. Bohling "jbohling@sycamoreleaf.com"
 
-RUN apt-get -y update && apt-get install -y vim sqlite3 nodejs
-
 RUN gem install rails
+
+RUN apt-get -y update && apt-get install -y vim sqlite3 nodejs
 
 COPY bashrc /root/.bashrc
 
