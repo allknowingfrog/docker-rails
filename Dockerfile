@@ -1,6 +1,6 @@
 FROM ruby
 
-Maintainer Jeremiah A. Bohling "jbohling@sycamoreleaf.com"
+MAINTAINER Jeremiah A. Bohling "jbohling@sycamoreleaf.com"
 
 RUN gem install rails
 
