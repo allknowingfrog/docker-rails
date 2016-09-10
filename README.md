@@ -1,31 +1,39 @@
-#rails-docker
+# docker-rails
 
-##Summary
+## Summary
+This is a Docker-based environment for developing Ruby on Rails via the Linux terminal and Vim.
 
-This is a minimal Docker setup for developing Rails via Vim and the command-line.
+## Docker Setup
 
-##Installation
+### Clone repo
+`git clone git@github.com:allknowingfrog/rails-docker.git`
 
-After installing Docker and cloning this repository...
+### To build the initial docker image
+Navigate into the repository directory and, if desired, edit bashrc and vimrc with your desired settings. While still inside the repository directory, build the Docker image with this command:
 
-Navigate into the repository directory and, if desired, replace bashrc and vimrc with your desired settings. While still inside the repository directory, build the Docker image with this command:
+`sudo docker build -t rails .`
 
-```sudo docker build -t rails .```
+This will name the new image "rails" but you can choose anything you prefer.
 
-This will name the new image 'rails' but you can tag it however you like.
+Note that Docker images and containers exist independent of the directories from which they are created, so the remaining commands can be run from anywhere.
 
-Docker images and containers exist independent of the directories from which they are created, so the following commands can be run from anywhere.
+### To create a container from the built image
+User `docker run` to create a new container. The `-d` flag causes the container to run in the background, while `-p` and `-v` map ports and volumes, respectively. Mounting a volume causes it to be shared between the local machine and the container (changes in one will be reflected in the other). In this example, we're using the "rails" image created in the previous step and naming our new container "rails-server".
 
-This command will create a new container and enter a bash shell within it:
+`sudo docker run -d --name rails-server -p 22:22 -p 3000:3000 -v ~/local/file/path:/container-file-path rails`
 
-```sudo docker run -it -p 3000:3000 -v ~/src:/src rails bash```
+### To ssh into container
+Connecting to the container from a terminal is just like accessing any remote machine. Note that the default password is set to "guest" in the Dockerfile.
 
-The `-it` flags create an interactive session, while `-p` and `-v` map ports and volumes, respectively. Mounting a volume causes it to be shared between the local machine and the container (changes in one will be reflected in the other). `rails` is the image name and `bash` is the command to execute inside the container.
+`ssh root@localhost`
 
-After a potentially-lengthy installation process, you'll enter a bash shell inside the new container. Exit the container with the normal `exit` command. After exiting, this container will continue to exist with all of its settings. You can view all existing containers with `sudo docker ps -a`. You can restart your container with this command:
+### To stop the container
+Stopped containers maintain their state and can be started again to resume work.
 
-```sudo docker start -i happy_archimedes```
+`sudo docker stop rails-server`
 
-Containers are automatically tagged at creation. Replace `happy_archimedes` with the appropriate tag name.
+### To start a stopped container
+`sudo docker start rails-server`
 
-Note that Git commands and other text editors can be used to interact with files mounted via the `-v` flag.
+### To see all containers
+`sudo docker ps -a`
