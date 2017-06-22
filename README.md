@@ -1,7 +1,7 @@
 # docker-rails
 
 ## Summary
-This is a Docker-based environment for developing Ruby on Rails via the Linux terminal and Vim.
+This is a Docker-based environment for developing Ruby on Rails.
 
 ## Docker Setup
 
