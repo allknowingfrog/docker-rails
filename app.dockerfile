@@ -1,7 +1,5 @@
 FROM ruby:latest
 
-MAINTAINER Jeremiah A. Bohling "jbohling@sycamoreleaf.com"
-
 RUN gem install rails
 
 RUN apt-get -y update && apt-get install -y nodejs
