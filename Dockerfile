@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ruby:2.4
 
 MAINTAINER Jeremiah A. Bohling "jbohling@sycamoreleaf.com"
 
