@@ -22,6 +22,20 @@ Note that Docker images and containers exist independent of the directories from
 
 The `-it` flags create an interactive session, while `-p` and `-v` map ports and volumes, respectively. Mounting a volume causes it to be shared between the local machine and the container (changes in one will be reflected in the other). Note that Git commands and other text editors can be used to interact with files mounted via the `-v` flag. The `--name` flag tags the new container, `rails` is the image to use and `bash` is the command to execute inside the container.
 
+### To create a container with a database
+
+You won't get very far in Rails without a database. You can install SQLite via the Dockerfile or in the container to use the Rails defaults. Alternatively, you may want to create and link to a database container. Here's an example for setting up MySQL.
+
+Start the database in the background:
+
+`sudo docker run --name rails-db -e MYSQL_ROOT_PASSWORD=guest -d mysql:5.7`
+
+Build a Rails container with a link to the database (using the `--link` flag):
+
+`sudo docker run -it --name rails-server -p 3000:3000 -v ~/local/file/path:/container-file-path --link rails-db:db rails bash`
+
+In this example, you'll want to use the `-d` flag with `rails new` to set up your database, i.e. `rails new container-file-path -d=mysql`. Then, replace "localhost" in `config/database.yml` with "db" and insert the database password, which is "guest" in this example.
+
 ### To stop the container
 Stopped containers maintain their state and can be started again to resume work.
 
