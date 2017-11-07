@@ -20,5 +20,4 @@ Your project will be located at `localhost:3000`
 `docker-compose restart`
 
 ### Destroy Docker Environment
-`docker-compose down`
-
+`docker-compose down`-
