@@ -1,8 +1,9 @@
-FROM ruby:2.3
+FROM ruby:2.5
 
-RUN apt-get -y update && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get install -y nodejs
 
-RUN gem install mailcatcher
+RUN gem install rails
 
 RUN echo "alias ls='ls --color=auto'" >> /root/.bashrc
 
