@@ -1,7 +1,10 @@
 FROM ruby:2.5
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get install -y nodejs
+RUN apt-get update -y && apt-get install -y gnupg2
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
+
+RUN gem update --system
 
 RUN gem install rails
 
